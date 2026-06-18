@@ -1,0 +1,338 @@
+{
+  "id": "sol",
+  "name": "Solar System",
+  "bodies": [
+    {
+      "id": "sol",
+      "name": "Sun",
+      "type": "star",
+      "parent": null,
+      "physical": {
+        "radiusKm": 695700,
+        "massKg": 1.989e30,
+        "rotationPeriodH": 609.12,
+        "axialTiltDeg": 7.25,
+        "albedo": 0.0
+      },
+      "orbit": null,
+      "render": {
+        "texture": "sun_albedo",
+        "color": "#FFF4E0",
+        "emissive": true
+      },
+      "data": {
+        "meanTempK": 5778,
+        "surfacePressureBar": null,
+        "atmosphere": null,
+        "weather": "Plasma surface with solar flares, coronal mass ejections, and an 11-year activity cycle."
+      },
+      "modules": []
+    },
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "type": "planet",
+      "parent": "sol",
+      "physical": {
+        "radiusKm": 2439.7,
+        "massKg": 3.285e23,
+        "rotationPeriodH": 1407.6,
+        "axialTiltDeg": 0.034,
+        "albedo": 0.088
+      },
+      "orbit": {
+        "aKm": 5.791e7,
+        "e": 0.2056,
+        "iDeg": 7.005,
+        "lonAscNodeDeg": 48.331,
+        "argPeriapsisDeg": 29.124,
+        "meanAnomalyDeg": 174.796,
+        "epoch": "J2000"
+      },
+      "render": {
+        "texture": "mercury_albedo",
+        "color": "#B5B5B5"
+      },
+      "data": {
+        "meanTempK": 440,
+        "minTempK": 100,
+        "maxTempK": 700,
+        "surfacePressureBar": 1e-14,
+        "atmosphere": {
+          "O2": 42.0,
+          "Na": 29.0,
+          "H2": 22.0,
+          "He": 6.0,
+          "K": 0.5
+        },
+        "weather": "No weather. Extreme temperature swings between sunlit and dark sides."
+      },
+      "modules": []
+    },
+    {
+      "id": "venus",
+      "name": "Venus",
+      "type": "planet",
+      "parent": "sol",
+      "physical": {
+        "radiusKm": 6051.8,
+        "massKg": 4.867e24,
+        "rotationPeriodH": -5832.5,
+        "axialTiltDeg": 177.36,
+        "albedo": 0.689
+      },
+      "orbit": {
+        "aKm": 1.082e8,
+        "e": 0.0068,
+        "iDeg": 3.395,
+        "lonAscNodeDeg": 76.681,
+        "argPeriapsisDeg": 54.884,
+        "meanAnomalyDeg": 50.115,
+        "epoch": "J2000"
+      },
+      "render": {
+        "texture": "venus_albedo",
+        "color": "#E8D5A3"
+      },
+      "data": {
+        "meanTempK": 737,
+        "minTempK": 735,
+        "maxTempK": 740,
+        "surfacePressureBar": 92.0,
+        "atmosphere": {
+          "CO2": 96.5,
+          "N2": 3.5
+        },
+        "weather": "Perpetual sulfuric acid cloud cover. Extreme greenhouse effect. Winds of 360 km/h at cloud tops."
+      },
+      "modules": []
+    },
+    {
+      "id": "earth",
+      "name": "Earth",
+      "type": "planet",
+      "parent": "sol",
+      "physical": {
+        "radiusKm": 6371.0,
+        "massKg": 5.972e24,
+        "rotationPeriodH": 23.9345,
+        "axialTiltDeg": 23.4393,
+        "albedo": 0.306
+      },
+      "orbit": {
+        "aKm": 1.496e8,
+        "e": 0.0167,
+        "iDeg": 0.00005,
+        "lonAscNodeDeg": -11.26064,
+        "argPeriapsisDeg": 114.20783,
+        "meanAnomalyDeg": 358.617,
+        "epoch": "J2000"
+      },
+      "render": {
+        "texture": "earth_albedo",
+        "color": "#4f7cff"
+      },
+      "data": {
+        "meanTempK": 288,
+        "minTempK": 184,
+        "maxTempK": 330,
+        "surfacePressureBar": 1.0,
+        "atmosphere": {
+          "N2": 78.08,
+          "O2": 20.95,
+          "Ar": 0.93,
+          "CO2": 0.042
+        },
+        "weather": "Variable with four seasons, active precipitation, liquid water oceans covering 71% of surface."
+      },
+      "modules": ["climate"]
+    },
+    {
+      "id": "mars",
+      "name": "Mars",
+      "type": "planet",
+      "parent": "sol",
+      "physical": {
+        "radiusKm": 3389.5,
+        "massKg": 6.417e23,
+        "rotationPeriodH": 24.6229,
+        "axialTiltDeg": 25.19,
+        "albedo": 0.17
+      },
+      "orbit": {
+        "aKm": 2.279e8,
+        "e": 0.0934,
+        "iDeg": 1.850,
+        "lonAscNodeDeg": 49.559,
+        "argPeriapsisDeg": 286.502,
+        "meanAnomalyDeg": 19.373,
+        "epoch": "J2000"
+      },
+      "render": {
+        "texture": "mars_albedo",
+        "color": "#C1440E"
+      },
+      "data": {
+        "meanTempK": 210,
+        "minTempK": 130,
+        "maxTempK": 308,
+        "surfacePressureBar": 0.006,
+        "atmosphere": {
+          "CO2": 95.32,
+          "N2": 2.6,
+          "Ar": 1.9,
+          "O2": 0.16
+        },
+        "weather": "Global dust storms, thin atmosphere, CO2 frost at poles in winter."
+      },
+      "modules": []
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "type": "planet",
+      "parent": "sol",
+      "physical": {
+        "radiusKm": 69911.0,
+        "massKg": 1.898e27,
+        "rotationPeriodH": 9.9250,
+        "axialTiltDeg": 3.13,
+        "albedo": 0.52
+      },
+      "orbit": {
+        "aKm": 7.783e8,
+        "e": 0.0489,
+        "iDeg": 1.304,
+        "lonAscNodeDeg": 100.464,
+        "argPeriapsisDeg": 273.867,
+        "meanAnomalyDeg": 20.020,
+        "epoch": "J2000"
+      },
+      "render": {
+        "texture": "jupiter_albedo",
+        "color": "#C88B3A"
+      },
+      "data": {
+        "meanTempK": 165,
+        "surfacePressureBar": null,
+        "atmosphere": {
+          "H2": 89.8,
+          "He": 10.2
+        },
+        "weather": "Persistent storm systems including the Great Red Spot (active for 350+ years). Wind speeds up to 620 km/h."
+      },
+      "modules": []
+    },
+    {
+      "id": "saturn",
+      "name": "Saturn",
+      "type": "planet",
+      "parent": "sol",
+      "physical": {
+        "radiusKm": 58232.0,
+        "massKg": 5.683e26,
+        "rotationPeriodH": 10.656,
+        "axialTiltDeg": 26.73,
+        "albedo": 0.47
+      },
+      "orbit": {
+        "aKm": 1.432e9,
+        "e": 0.0565,
+        "iDeg": 2.485,
+        "lonAscNodeDeg": 113.665,
+        "argPeriapsisDeg": 339.392,
+        "meanAnomalyDeg": 317.020,
+        "epoch": "J2000"
+      },
+      "render": {
+        "texture": "saturn_albedo",
+        "color": "#E8D191",
+        "hasRings": true
+      },
+      "data": {
+        "meanTempK": 134,
+        "surfacePressureBar": null,
+        "atmosphere": {
+          "H2": 96.3,
+          "He": 3.25
+        },
+        "weather": "Periodic mega-storms (Great White Spot). Hexagonal polar vortex at north pole. Winds up to 1800 km/h."
+      },
+      "modules": []
+    },
+    {
+      "id": "uranus",
+      "name": "Uranus",
+      "type": "planet",
+      "parent": "sol",
+      "physical": {
+        "radiusKm": 25362.0,
+        "massKg": 8.681e25,
+        "rotationPeriodH": -17.24,
+        "axialTiltDeg": 97.77,
+        "albedo": 0.51
+      },
+      "orbit": {
+        "aKm": 2.867e9,
+        "e": 0.0463,
+        "iDeg": 0.773,
+        "lonAscNodeDeg": 74.006,
+        "argPeriapsisDeg": 96.999,
+        "meanAnomalyDeg": 142.238,
+        "epoch": "J2000"
+      },
+      "render": {
+        "texture": "uranus_albedo",
+        "color": "#7DE8E8"
+      },
+      "data": {
+        "meanTempK": 76,
+        "surfacePressureBar": null,
+        "atmosphere": {
+          "H2": 82.5,
+          "He": 15.2,
+          "CH4": 2.3
+        },
+        "weather": "Extreme axial tilt causes 42-year seasons. Winds up to 900 km/h. Coldest planetary atmosphere in the Solar System."
+      },
+      "modules": []
+    },
+    {
+      "id": "neptune",
+      "name": "Neptune",
+      "type": "planet",
+      "parent": "sol",
+      "physical": {
+        "radiusKm": 24622.0,
+        "massKg": 1.024e26,
+        "rotationPeriodH": 16.11,
+        "axialTiltDeg": 28.32,
+        "albedo": 0.41
+      },
+      "orbit": {
+        "aKm": 4.515e9,
+        "e": 0.0086,
+        "iDeg": 1.770,
+        "lonAscNodeDeg": 131.784,
+        "argPeriapsisDeg": 273.187,
+        "meanAnomalyDeg": 256.228,
+        "epoch": "J2000"
+      },
+      "render": {
+        "texture": "neptune_albedo",
+        "color": "#4B70DD"
+      },
+      "data": {
+        "meanTempK": 72,
+        "surfacePressureBar": null,
+        "atmosphere": {
+          "H2": 80.0,
+          "He": 19.0,
+          "CH4": 1.5
+        },
+        "weather": "Fastest winds in the Solar System — up to 2100 km/h. Dark storm systems analogous to Jupiter's Great Red Spot."
+      },
+      "modules": []
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "systems": [
+    {
+      "id": "sol",
+      "name": "Solar System",
+      "file": "systems/sol.json"
+    }
+  ],
+  "default": "sol"
+}

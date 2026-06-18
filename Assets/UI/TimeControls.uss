@@ -1,0 +1,64 @@
+.root {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.panel {
+    align-items: center;
+    background-color: rgba(20, 20, 180, 0.9);
+    border-radius: 10px;
+    padding: 12px 20px;
+    margin-bottom: 24px;
+}
+
+.date-label {
+    font-size: 18px;
+    color: rgb(220, 220, 255);
+    margin-bottom: 8px;
+    -unity-font-style: bold;
+}
+
+.controls-row {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.ctrl-btn {
+    width: 48px;
+    height: 36px;
+    margin: 0 4px;
+    font-size: 16px;
+    background-color: rgba(60, 60, 100, 0.8);
+    border-color: rgba(120, 120, 200, 0.5);
+    border-width: 1px;
+    border-radius: 6px;
+    color: rgb(200, 200, 255);
+}
+
+.ctrl-btn:hover {
+    background-color: rgba(80, 80, 140, 0.9);
+}
+
+.rate-label {
+    font-size: 13px;
+    color: rgb(160, 160, 200);
+    margin-bottom: 8px;
+}
+
+.scale-btn {
+    font-size: 12px;
+    background-color: rgba(40, 80, 60, 0.8);
+    border-color: rgba(80, 160, 100, 0.5);
+    border-width: 1px;
+    border-radius: 6px;
+    color: rgb(160, 220, 180);
+    padding: 4px 10px;
+}
+
+.scale-btn:hover {
+    background-color: rgba(60, 110, 80, 0.9);
+}

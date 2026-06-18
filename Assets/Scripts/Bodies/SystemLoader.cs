@@ -37,6 +37,9 @@ namespace Dechange
 
         public IReadOnlyDictionary<string, BodyDefinition> Bodies => _bodyDefs;
 
+        public System.Collections.Generic.IEnumerable<BodyRenderer> GetAllRenderers() =>
+            _renderers.Values;
+
         private IEnumerator LoadDefaultSystem()
         {
             yield return null; // wait one frame for singletons
@@ -83,6 +86,25 @@ namespace Dechange
             // Two-pass init — every renderer must exist before parent lookups
             foreach (var (id, renderer) in _renderers)
                 renderer.Initialize(_bodyDefs[id], _renderers);
+
+            // Add orbit rings for bodies that have orbital elements
+            foreach (var (id, renderer) in _renderers)
+            {
+                var body = _bodyDefs[id];
+                if (body.orbit == null) continue;
+
+                var ringGO = new GameObject($"{body.name} Orbit Ring");
+                ringGO.transform.SetParent(transform);
+
+                var parentRenderer = string.IsNullOrEmpty(body.parent)
+                    ? null : GetRenderer(body.parent);
+
+                Color ringColor = Color.white;
+                if (body.render?.color != null)
+                    ColorUtility.TryParseHtmlString(body.render.color, out ringColor);
+
+                ringGO.AddComponent<OrbitRing>().Initialize(body.orbit, parentRenderer, ringColor);
+            }
         }
 
         private static string DataPath(string relative) =>

@@ -16,22 +16,30 @@ namespace Dechange
 
         [SerializeField] private ScaleMode _mode = ScaleMode.Visual;
 
-        // --- Visual mode: log-compressed distances ---
+        // Visual mode: log-compressed distances
         // renderDist = distScale * ln(1 + realKm / distRef)
         [SerializeField] private float _visualDistScale = 20f;
         [SerializeField] private float _visualDistRefKm = 1.5e7f; // 0.1 AU
 
-        // Visual mode body sizes: realRadius / sizeKmPerUnit, min clamp
-        [SerializeField] private float _visualSizeKmPerUnit = 100000f;
-        [SerializeField] private float _minRenderedRadius = 0.2f;
+        // Body sizes in visual mode
+        [SerializeField] private float _visualSizeKmPerUnit = 50000f;
+        [SerializeField] private float _minRenderedRadius = 0.15f;
 
-        // --- True scale ---
-        [SerializeField] private float _trueScaleKmPerUnit = 1e6f; // 1 unit = 1,000,000 km
+        // True scale: 1 Unity unit = N km
+        [SerializeField] private float _trueDistKmPerUnit = 3e6f; // 1 AU ≈ 50 units
+        [SerializeField] private float _trueSizeKmPerUnit = 50000f;
+
+        public event Action OnScaleModeChanged;
 
         public ScaleMode Mode
         {
             get => _mode;
-            set => _mode = value;
+            set
+            {
+                if (_mode == value) return;
+                _mode = value;
+                OnScaleModeChanged?.Invoke();
+            }
         }
 
         void Awake()
@@ -40,39 +48,29 @@ namespace Dechange
             Instance = this;
         }
 
-        /// <summary>
-        /// Maps a real position in km (relative to system root) to a Unity world position.
-        /// </summary>
+        /// <summary>Maps a real position in km (relative to system root) to a Unity world position.</summary>
         public Vector3 PositionToRender(Vector3d realKm)
         {
             if (_mode == ScaleMode.True)
-                return new Vector3(
-                    (float)(realKm.x / _trueScaleKmPerUnit),
-                    (float)(realKm.y / _trueScaleKmPerUnit),
-                    (float)(realKm.z / _trueScaleKmPerUnit));
+            {
+                float s = 1f / _trueDistKmPerUnit;
+                return new Vector3((float)realKm.x * s, (float)realKm.y * s, (float)realKm.z * s);
+            }
 
             double dist = realKm.Magnitude;
             if (dist < 1e-6) return Vector3.zero;
-
             double renderDist = _visualDistScale * Math.Log(1.0 + dist / _visualDistRefKm);
             float scale = (float)(renderDist / dist);
             return new Vector3((float)realKm.x * scale, (float)realKm.y * scale, (float)realKm.z * scale);
         }
 
-        /// <summary>
-        /// Maps a real radius in km to a Unity diameter (applied as localScale).
-        /// </summary>
+        /// <summary>Maps a real radius in km to a Unity render radius.</summary>
         public float RadiusToRender(double realRadiusKm)
         {
-            if (_mode == ScaleMode.True)
-                return (float)(realRadiusKm / _trueScaleKmPerUnit);
-
-            return Mathf.Max((float)(realRadiusKm / _visualSizeKmPerUnit), _minRenderedRadius);
+            float kmPerUnit = _mode == ScaleMode.True ? _trueSizeKmPerUnit : _visualSizeKmPerUnit;
+            return Mathf.Max((float)(realRadiusKm / kmPerUnit), _minRenderedRadius);
         }
 
-        public void ToggleMode()
-        {
-            _mode = _mode == ScaleMode.Visual ? ScaleMode.True : ScaleMode.Visual;
-        }
+        public void ToggleMode() => Mode = _mode == ScaleMode.Visual ? ScaleMode.True : ScaleMode.Visual;
     }
 }

@@ -24,11 +24,13 @@ namespace Dechange.Editor
             var cameraGO = new GameObject("Main Camera");
             cameraGO.tag = "MainCamera";
             var cam = cameraGO.AddComponent<Camera>();
-            cam.farClipPlane = 5000f;
+            cam.farClipPlane = 8000f;
             cam.backgroundColor = Color.black;
             cam.clearFlags = CameraClearFlags.SolidColor;
             cameraGO.AddComponent<UniversalAdditionalCameraData>();
-            cameraGO.transform.position = new Vector3(0, 50, -140);
+            var focusCam = cameraGO.AddComponent<FocusCamera>();
+            cameraGO.AddComponent<FloatingOrigin>();
+            cameraGO.transform.position = new Vector3(0, 600, -1200);
             cameraGO.transform.LookAt(Vector3.zero);
 
             // --- Ambient light (deep space) ---
@@ -61,7 +63,8 @@ namespace Dechange.Editor
             if (!File.Exists(prefabPath))
             {
                 var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                Object.DestroyImmediate(sphere.GetComponent<SphereCollider>());
+                // Keep SphereCollider for click-to-focus picking; FocusCamera does its own
+                // math-based picking so the collider is just a fallback — leave it at default size
                 prefab = PrefabUtility.SaveAsPrefabAsset(sphere, prefabPath);
                 Object.DestroyImmediate(sphere);
                 Debug.Log("[SceneSetup] Created Body prefab at " + prefabPath);

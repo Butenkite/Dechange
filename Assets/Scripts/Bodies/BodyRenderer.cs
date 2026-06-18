@@ -25,6 +25,13 @@ namespace Dechange
 
             _meshRenderer = GetComponent<MeshRenderer>();
             ApplyVisuals();
+            ScaleService.Instance.OnScaleModeChanged += ApplyVisuals;
+        }
+
+        void OnDestroy()
+        {
+            if (ScaleService.Instance != null)
+                ScaleService.Instance.OnScaleModeChanged -= ApplyVisuals;
         }
 
         void Update()

@@ -35,6 +35,7 @@ namespace Dechange
         private int _rateIndex = DefaultRateIndex;
         private Label _dateLabel;
         private Label _rateLabel;
+        private Button _scaleBtn;
 
         void Start()
         {
@@ -42,6 +43,7 @@ namespace Dechange
 
             _dateLabel = root.Q<Label>("lbl-date");
             _rateLabel = root.Q<Label>("lbl-rate");
+            _scaleBtn  = root.Q<Button>("btn-scale");
 
             Bind(root, "btn-slower", () => StepRate(-1));
             Bind(root, "btn-pause",  SimClock.Instance.Pause);
@@ -50,10 +52,12 @@ namespace Dechange
             Bind(root, "btn-scale",  ScaleService.Instance.ToggleMode);
 
             SimClock.Instance.OnTimeChanged += _ => RefreshDate();
+            ScaleService.Instance.OnScaleModeChanged += RefreshScaleLabel;
+
             RefreshDate();
             RefreshRate();
+            RefreshScaleLabel();
 
-            // Apply default rate
             SimClock.Instance.SetRate(Rates[_rateIndex]);
         }
 
@@ -81,6 +85,13 @@ namespace Dechange
         {
             if (_rateLabel == null) return;
             _rateLabel.text = RateLabels[_rateIndex];
+        }
+
+        private void RefreshScaleLabel()
+        {
+            if (_scaleBtn == null) return;
+            _scaleBtn.text = ScaleService.Instance.Mode == ScaleService.ScaleMode.Visual
+                ? "Visual Scale" : "True Scale";
         }
 
         // Standard Julian Date → Gregorian calendar (proleptic)
